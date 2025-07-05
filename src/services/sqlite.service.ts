@@ -19,7 +19,7 @@ export class SQLiteService {
 
   async initDB() {
     try {
-      // Crear conexión
+      // Crear conexión se modifiica comentario para evitar error de consola
       const db = await this.sqlite.createConnection("myecommerce", false, "no-encryption", 1, false);
 
       this.db = db;
