@@ -1,0 +1,7 @@
+{
+  "name": "ecommerceUDL",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
