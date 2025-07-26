@@ -2,14 +2,13 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-confirmation',
   templateUrl: './confirmation.component.html',
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, RouterModule],
+  imports: [IonicModule, CommonModule, RouterModule]
 })
 export class ConfirmationPage {
   order: any;
@@ -30,4 +29,9 @@ export class ConfirmationPage {
   getTotal(): number {
     return this.cartItems.reduce((total, item) => total + item.price, 0);
   }
+
+  backToCatalog() {
+    this.router.navigate(['/catalog']);
+  }
 }
+
