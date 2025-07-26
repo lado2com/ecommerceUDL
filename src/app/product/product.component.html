@@ -1,3 +1,21 @@
-<p>
-  product works!
-</p>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Detalles del producto</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card *ngIf="product">
+    <ion-card-header>
+      <ion-card-title>{{ product.name }}</ion-card-title>
+      <ion-card-subtitle>{{ product.price | currency }}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <p>{{ product.description }}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-button expand="block" color="primary" (click)="addToCart()">
+    Agregar al carrito
+  </ion-button>
+</ion-content>

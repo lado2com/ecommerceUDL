@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
-import { SQLiteService } from '../services/sqlite.service';
+import { SQLiteService } from './services/sqlite.service';
 
 @Component({
   selector: 'app-root',

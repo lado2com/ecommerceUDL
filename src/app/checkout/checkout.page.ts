@@ -1,20 +1,46 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.page.html',
-  styleUrls: ['./checkout.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonicModule, CommonModule, FormsModule, RouterModule]
 })
-export class CheckoutPage implements OnInit {
+export class CheckoutPage {
+  order = {
+    name: '',
+    address: '',
+    contact: ''
+  };
 
-  constructor() { }
+  cartItems: any[] = [];
+
+  constructor(private router: Router) {}
 
   ngOnInit() {
+    this.cartItems = history.state.cartItems || [];
+
+    if (this.cartItems.length === 0) {
+      // Si se entra directo a esta página sin carrito
+      this.router.navigate(['/catalog']);
+    }
   }
 
+  getTotal(): number {
+    return this.cartItems.reduce((total, item) => total + item.price, 0);
+  }
+
+  submitOrder() {
+    this.router.navigate(['/confirmation'], {
+      state: {
+        order: this.order,
+        cartItems: this.cartItems
+      }
+    });
+  }
 }

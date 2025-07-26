@@ -1,14 +1,33 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { IonicModule } from '@ionic/angular';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-confirmation',
   templateUrl: './confirmation.component.html',
-  styleUrls: ['./confirmation.component.scss'],
+  standalone: true,
+  imports: [IonicModule, CommonModule, FormsModule, RouterModule],
 })
-export class ConfirmationComponent  implements OnInit {
+export class ConfirmationPage {
+  order: any;
+  cartItems: any[] = [];
 
-  constructor() { }
+  constructor(private router: Router) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    const state = history.state;
+    this.order = state.order;
+    this.cartItems = state.cartItems || [];
 
+    if (!this.order) {
+      this.router.navigate(['/catalog']);
+    }
+  }
+
+  getTotal(): number {
+    return this.cartItems.reduce((total, item) => total + item.price, 0);
+  }
 }
